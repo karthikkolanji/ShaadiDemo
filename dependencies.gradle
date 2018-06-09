@@ -1,0 +1,131 @@
+ext.versions = [
+
+        androidPlugin          : '3.0.1',
+        googleServicePlugin    : '3.0.0',
+
+        support                : '27.1.1',
+
+        multiDex               : '1.0.1',
+
+        playService            : '11.4.2',
+        fcm                    : '11.4.2',
+
+        retrofit               : '2.4.0',
+        gson                   : '2.8.4',
+        okhttploginInterceptor : '3.5.0',
+
+        butterKnife            : '8.8.1',
+
+        rxJava                 : '2.0.5',
+        rxAndroid              : '2.0.1',
+
+        dexterRuntimePermission: '3.0.2',
+
+        dbFlow                 : '4.2.4',
+        dbInspector            : '3.4.1@aar',
+
+        photoView              : '2.0.0',
+        imageCompressor        : '1.0.3',
+        glide                  : '4.3.1',
+        imageCrop              : '1.0.1@aar',
+
+        circleIndicator        : '1.2.2@aar',
+
+        timber                 : '4.6.0',
+
+        kotlin                 : '1.2.41'
+]
+
+ext.buildVersion = [
+        compileSdkVersion: 27,
+        buildToolsVersion: '27.0.3',
+]
+
+ext.gradlePluginVersion = [
+        android      : "com.android.tools.build:gradle:$versions.androidPlugin",
+        googleService: "com.google.gms:google-services:$versions.googleServicePlugin",
+]
+
+ext.appVersion = [
+        versionCode: 1,
+        versionName: "1.0",
+]
+
+ext.appSdk = [
+        minSdkVersion   : 16,
+        targetSdkVersion: 23
+]
+
+
+ext.abiCodes = [
+        'x86'        : 1,
+        'armeabi'    : 2,
+        'armeabi-v7a': 3
+]
+
+// Dependencies
+
+ext.library = [
+
+        // Support library
+        supportDesign          : "com.android.support:design:$versions.support",
+        supportRecyclerView    : "com.android.support:recyclerview-v7:$versions.support",
+        supportAppCompat       : "com.android.support:appcompat-v7:$versions.support",
+        supportCardView        : "com.android.support:cardview-v7:$versions.support",
+        supportV7              : "com.android.support:support-v4:$versions.support",
+
+        // Retrofit
+        retrofit               : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        retrofitRxAdapter      : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+        gsonConverter          : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        gson                   : "com.google.code.gson:gson:$versions.gson",
+
+        //OkHttp Logging Interceptor
+        okhttpLoginInterceptor : "com.squareup.okhttp3:logging-interceptor:$versions.okhttploginInterceptor",
+
+        // Butter knife
+        butterKnife            : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler    : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+
+        // Google Play Service
+        playServiceLocation    : "com.google.android.gms:play-services-location:$versions.playService",
+        playServicesMaps       : "com.google.android.gms:play-services-maps:$versions.playService",
+
+        // FCM
+        fcmMessaging           : "com.google.firebase:firebase-messaging:$versions.fcm",
+
+        // Database
+        dbFlow                 : "com.github.Raizlabs.DBFlow:dbflow:$versions.dbFlow",
+        dbFlowProcessor        : "com.github.Raizlabs.DBFlow:dbflow-processor:$versions.dbFlow",
+        dbFlowCore             : "com.github.Raizlabs.DBFlow:dbflow-core:$versions.dbFlow",
+
+        // Database debugging
+        dbInspector            : "im.dino:dbinspector:$versions.dbInspector",
+
+        // Image loading
+        glide                  : "com.github.bumptech.glide:glide:$versions.glide",
+        glideCompiler          : "com.github.bumptech.glide:compiler:$versions.glide",
+
+        // Image compressor
+        zeloryCompressor       : "id.zelory:compressor:$versions.imageCompressor",
+
+        // Image zoom
+        photoView              : "com.github.chrisbanes:PhotoView:$versions.photoView",
+
+        // Image crop
+        soundCloudCrop         : "com.soundcloud.android:android-crop:$versions.imageCrop",
+
+        // Rx
+        rxJava                 : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
+        rxAndroid              : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
+
+        // Others
+        multiDex               : "com.android.support:multidex:$versions.multidex",
+        dexterRuntimePermission: "com.karumi:dexter:$versions.dexterRuntimePermission",
+        timber                 : "com.jakewharton.timber:timber:$versions.timber",
+        kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+]
+
+
+
+

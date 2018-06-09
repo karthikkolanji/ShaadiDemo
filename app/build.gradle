@@ -1,0 +1,113 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion buildVersion.compileSdkVersion
+    buildToolsVersion buildVersion.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.startedup.base"
+        minSdkVersion appSdk.minSdkVersion
+        targetSdkVersion appSdk.targetSdkVersion
+        versionCode appVersion.versionCode
+        versionName appVersion.versionName
+        vectorDrawables.useSupportLibrary = true
+        resConfigs "en"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "tier"
+    productFlavors {
+
+        prodFlavour {
+            dimension 'tier'
+            applicationId "actual app package name"
+        }
+        devFlavour {
+            dimension 'tier'
+            applicationId "com.startedup.base"
+        }
+    }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/layout/activity',
+                    'src/main/res/layout/bottom_sheet',
+                    'src/main/res/layout/dialog',
+                    'src/main/res/layout/fragment',
+                    'src/main/res/layout/include',
+                    'src/main/res/layout/item'
+            ]
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Support library
+    implementation library.supportV7
+    implementation library.supportDesign
+    implementation library.supportRecyclerView
+    implementation library.supportAppCompat
+    implementation library.supportCardView
+
+    // Retrofit
+    implementation library.retrofit
+    implementation library.retrofitRxAdapter
+    implementation library.gsonConverter
+    implementation library.gson
+
+    //OkHttp Logger
+    implementation library.okhttpLoginInterceptor
+
+    // ButterKnife
+    implementation library.butterKnife
+    annotationProcessor library.butterKnifeCompiler
+
+    // Google Play Service
+    implementation library.playServiceLocation
+    implementation library.playServicesMaps
+
+    // FCM
+    implementation library.fcmMessaging
+
+    // Database
+    implementation library.dbFlow
+    annotationProcessor library.dbFlowProcessor
+    implementation library.dbFlowCore
+
+    // Database debugging
+    debugImplementation library.dbInspector
+
+    // Image loading
+    implementation library.glide
+    annotationProcessor library.glideCompiler
+
+    // Image compressor
+    implementation library.zeloryCompressor
+
+    // Image zoom
+    implementation library.photoView
+
+    // Image crop
+    implementation library.soundCloudCrop
+
+    // Rx
+    implementation library.rxJava
+    implementation library.rxAndroid
+
+    // Other
+    implementation library.dexterRuntimePermission
+    implementation library.timber
+    implementation library.kotlin
+}
+repositories {
+    mavenCentral()
+}
