@@ -42,7 +42,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void requestMultiplePermission(final int permissionType, ArrayList<String> permissionList) {
 
-        final Intent persmissionResultIntent = new Intent();
+        final Intent permissionResultIntent = new Intent();
 
         Dexter.withActivity(this)
                 .withPermissions(permissionList)
@@ -50,54 +50,54 @@ public class BaseActivity extends AppCompatActivity {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.isAnyPermissionPermanentlyDenied()) {
-                            persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
-                            persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.ALWAYS_DENIED);
+                            permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
+                            permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.ALWAYS_DENIED);
                         } else if (report.areAllPermissionsGranted()) {
-                            persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
-                            persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.ALL_GRANTED);
+                            permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
+                            permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.ALL_GRANTED);
                         } else {
-                            persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
-                            persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.DENIED);
+                            permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
+                            permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.DENIED);
                         }
-                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(persmissionResultIntent);
+                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(permissionResultIntent);
 
                     }
 
                     @Override
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.SHOW_RATIONALE);
-                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(persmissionResultIntent);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.SHOW_RATIONALE);
+                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(permissionResultIntent);
                     }
                 });
     }
 
     protected void requestSinglePermission(final int permissionType, String permission) {
 
-        final Intent persmissionResultIntent = new Intent();
+        final Intent permissionResultIntent = new Intent();
 
         Dexter.withActivity(this)
                 .withPermission(permission)
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.ALL_GRANTED);
-                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(persmissionResultIntent);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.ALL_GRANTED);
+                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(permissionResultIntent);
                     }
 
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.DENIED);
-                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(persmissionResultIntent);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.DENIED);
+                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(permissionResultIntent);
                     }
 
                     @Override
                     public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
-                        persmissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.SHOW_RATIONALE);
-                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(persmissionResultIntent);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_TYPE, permissionType);
+                        permissionResultIntent.putExtra(IntentExtraConstant.PERMISSION_RESULT, PermissionConstant.SHOW_RATIONALE);
+                        LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(permissionResultIntent);
                     }
                 });
     }
