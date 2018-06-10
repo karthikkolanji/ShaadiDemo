@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">BaseCode</string>
+    <string name="title_activity_movie">MovieActivity</string>
+
+
+    <!--Error-->
+    <string name="network_error">No network. Please try again</string>
+    <string name="timeout_error">Taking too long to load data. Please check your network</string>
+    <string name="unknown_error">Something went wrong. Please try again</string>
+
+    <!--Permission-->
+    <string name="permission_denied">Permission denied. Aborting process</string>
+    <string name="permission_permanently_denied">Permission denied. Aborting process</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_show_rationale">Show rationale</string>
+    <string name="permission_needed">You need to enable the permission in app setting to use the app.</string>
+    <string name="permission_title">Enable permission.</string>
+
 </resources>

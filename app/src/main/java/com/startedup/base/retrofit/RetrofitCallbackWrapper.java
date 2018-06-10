@@ -1,7 +1,9 @@
 package com.startedup.base.retrofit;
 
-import com.startedup.base.ui.BaseResponse;
-import com.startedup.base.ui.BaseView;
+import com.startedup.base.R;
+import com.startedup.base.ui.base.BaseResponse;
+import com.startedup.base.ui.base.BaseView;
+import com.startedup.base.utils.ResourceFinder;
 
 import org.json.JSONObject;
 
@@ -19,31 +21,40 @@ public abstract class RetrofitCallbackWrapper<T extends BaseResponse> extends Di
 
     //BaseView is just a reference of a View in MVP
     private WeakReference<BaseView> weakReference;
+    private boolean isDialog = false;
+    BaseView view;
 
-    public RetrofitCallbackWrapper(BaseView view) {
+    public RetrofitCallbackWrapper(BaseView view, boolean isDialog) {
         this.weakReference = new WeakReference<>(view);
+        this.isDialog = isDialog;
+        view = weakReference.get();
+        view.showLoading(isDialog, "Please wait");
     }
 
-    protected abstract void onSuccess(T t);
+    //protected abstract void onSuccess(T t);
 
     @Override
     public void onNext(T t) {
         //You can return StatusCodes of different cases from your API and handle it here. I usually include these cases on BaseResponse and iherit it from every Response
-        onSuccess(t);
+        view = weakReference.get();
+        view.hideError();
+        view.hideLoading();
+        view.onSuccess(t);
     }
 
     @Override
     public void onError(Throwable e) {
-        BaseView view = weakReference.get();
+        view = weakReference.get();
+        view.hideLoading();
         if (e instanceof HttpException) {
             ResponseBody responseBody = ((HttpException) e).response().errorBody();
-            view.showError(getErrorMessage(responseBody));
+            view.showError(isDialog, ResourceFinder.getString(R.string.unknown_error));
         } else if (e instanceof SocketTimeoutException) {
-            view.showError("");
+            view.showError(isDialog, ResourceFinder.getString(R.string.timeout_error));
         } else if (e instanceof IOException) {
-            view.showError("");
+            view.showError(isDialog, ResourceFinder.getString(R.string.network_error));
         } else {
-            view.showError(e.getMessage());
+            view.showError(isDialog, ResourceFinder.getString(R.string.network_error));
         }
     }
 

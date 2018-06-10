@@ -5,6 +5,11 @@ android {
     compileSdkVersion buildVersion.compileSdkVersion
     buildToolsVersion buildVersion.buildToolsVersion
 
+    repositories {
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
     defaultConfig {
         applicationId "com.startedup.base"
         minSdkVersion appSdk.minSdkVersion
@@ -46,6 +51,9 @@ android {
             ]
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -57,6 +65,7 @@ dependencies {
     implementation library.supportRecyclerView
     implementation library.supportAppCompat
     implementation library.supportCardView
+    implementation library.constraintLayout
 
     // Retrofit
     implementation library.retrofit
@@ -69,6 +78,7 @@ dependencies {
 
     // ButterKnife
     implementation library.butterKnife
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     annotationProcessor library.butterKnifeCompiler
 
     // Google Play Service
@@ -84,7 +94,7 @@ dependencies {
     implementation library.dbFlowCore
 
     // Database debugging
-    debugImplementation library.dbInspector
+    //debugImplementation library.dbInspector
 
     // Image loading
     implementation library.glide
@@ -111,3 +121,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'kotlin-android-extensions'

@@ -11,10 +11,6 @@ import android.support.v4.app.FragmentTransaction;
  */
 public final class FragmentTransactionUtil {
 
-    private FragmentTransactionUtil() {
-        throw new AssertionError();
-    }
-
     public static void addFragment(FragmentManager fragmentManager,
                                    @NonNull Fragment fragment,
                                    @IdRes int fragmentContainerId,
