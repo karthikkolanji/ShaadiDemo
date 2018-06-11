@@ -1,10 +1,10 @@
 package com.startedup.base.ui.imdb;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,10 +14,13 @@ import android.widget.Button;
 
 import com.startedup.base.R;
 import com.startedup.base.model.movies.TopRatedMovieResponse;
+import com.startedup.base.ui.base.BaseFragment;
 import com.startedup.base.ui.base.BaseView;
 import com.startedup.base.utils.CommonUtil;
+import com.startedup.base.utils.ResourceFinder;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +28,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import timber.log.Timber;
 
-public class TopRatedMovieFragment extends Fragment implements BaseView {
+public class TopRatedMovieFragment extends BaseFragment implements BaseView {
 
     @BindView(R.id.rv_top_rated_movies)
     RecyclerView rvTopRatedMovies;
@@ -104,6 +107,21 @@ public class TopRatedMovieFragment extends Fragment implements BaseView {
 
     @OnClick(R.id.bt_load)
     public void onLoadClicked() {
-        mPresenter.getTopRatedMovies();
+        //mPresenter.getTopRatedMovies();
+        ArrayList<String> permissionArray = new ArrayList<>();
+        permissionArray.add(Manifest.permission.RECORD_AUDIO);
+        permissionArray.add(Manifest.permission.CAMERA);
+        permissionArray.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        requestMultiplePermission(permissionArray);
+    }
+
+    @Override
+    protected void onPermissionAllGranted() {
+        CommonUtil.showToasLong(getActivity(), ResourceFinder.getString(R.string.permission_granted));
+    }
+
+    @Override
+    protected void onPermissionGranted() {
+        CommonUtil.showToasLong(getActivity(), ResourceFinder.getString(R.string.permission_granted));
     }
 }

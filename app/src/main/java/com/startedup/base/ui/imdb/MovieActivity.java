@@ -29,7 +29,7 @@ public class MovieActivity extends BaseActivity implements FragmentCommunication
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
         ButterKnife.bind(this);
-        //replaceFragment(new TopRatedMovieFragment(), R.id.fragment_container, true);
+        replaceFragment(new TopRatedMovieFragment(), R.id.fragment_container, true);
     }
 
 

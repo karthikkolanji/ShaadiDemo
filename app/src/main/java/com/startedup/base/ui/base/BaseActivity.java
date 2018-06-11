@@ -48,16 +48,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void requestMultiplePermission(ArrayList<String> permissionList) {
-
-        final Intent permissionResultIntent = new Intent();
-
         Dexter.withActivity(this)
                 .withPermissions(permissionList)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.isAnyPermissionPermanentlyDenied()) {
-                            showPermissionNeededDialog();
+                            showEnablePermissionDialog();
 
                         } else if (report.areAllPermissionsGranted()) {
                             onPermissionAllGranted();
@@ -80,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }).check();
     }
 
-    protected void requestSinglePermission(final int permissionType, String permission) {
+    protected void requestSinglePermission(String permission) {
 
         Dexter.withActivity(this)
                 .withPermission(permission)
@@ -93,7 +90,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
                         if (response.isPermanentlyDenied()) {
-                            showPermissionNeededDialog();
+                            showEnablePermissionDialog();
                         } else {
                             CommonUtil.showToasLong(BaseActivity.this, ResourceFinder.getString(R.string.permission_denied));
                         }
@@ -103,10 +100,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                     public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
-                });
+                }).withErrorListener(new PermissionRequestErrorListener() {
+            @Override
+            public void onError(DexterError error) {
+                CommonUtil.showToasLong(BaseActivity.this, error.toString());
+            }
+        });
     }
 
-    private void showPermissionNeededDialog() {
+    private void showEnablePermissionDialog() {
         builder = DialogUtils.getAlertDialog(BaseActivity.this, R.string.permission_title, R.string.permission_needed, true);
         AlertDialog dialog = null;
         builder.setPositiveButton("Open setting", new DialogInterface.OnClickListener() {
