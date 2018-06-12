@@ -107,7 +107,7 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
 
     @OnClick(R.id.bt_load)
     public void onLoadClicked() {
-        //mPresenter.getTopRatedMovies();
+        mPresenter.getTopRatedMovies();
         ArrayList<String> permissionArray = new ArrayList<>();
         permissionArray.add(Manifest.permission.RECORD_AUDIO);
         permissionArray.add(Manifest.permission.CAMERA);
