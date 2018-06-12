@@ -48,6 +48,16 @@ public class MovieActivity extends BaseActivity implements FragmentCommunication
         CommonUtil.showToasLong(this, ResourceFinder.getString(R.string.permission_granted));
     }
 
+    @Override
+    protected void onNetworkOn() {
+        CommonUtil.showToasShort(this, "Network ON");
+    }
+
+    @Override
+    protected void onNetworkOff() {
+        CommonUtil.showToasShort(this, "Network OFF");
+    }
+
     @OnClick(R.id.fragment_container)
     public void onFragmentContainerClicked() {
         ArrayList<String> permissionArray = new ArrayList<>();

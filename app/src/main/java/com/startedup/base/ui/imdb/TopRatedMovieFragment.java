@@ -124,4 +124,14 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
     protected void onPermissionGranted() {
         CommonUtil.showToasLong(getActivity(), ResourceFinder.getString(R.string.permission_granted));
     }
+
+    @Override
+    protected void onNetworkOn() {
+
+    }
+
+    @Override
+    protected void onNetworkOff() {
+
+    }
 }

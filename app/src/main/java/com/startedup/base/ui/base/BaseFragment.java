@@ -3,6 +3,7 @@ package com.startedup.base.ui.base;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.startedup.base.R;
+import com.startedup.base.broadcast.NetworkStateReceiver;
 import com.startedup.base.utils.CommonUtil;
 import com.startedup.base.utils.DialogUtils;
 import com.startedup.base.utils.ResourceFinder;
@@ -27,13 +29,18 @@ import com.startedup.base.utils.ResourceFinder;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements NetworkStateReceiver.NetworkStateReceiverListener {
 
     private BaseActivity mBaseActivity;
+    private NetworkStateReceiver mNetworkStateReceiver;
 
     protected abstract void onPermissionAllGranted();
 
     protected abstract void onPermissionGranted();
+
+    protected abstract void onNetworkOn();
+
+    protected abstract void onNetworkOff();
 
     private AlertDialog.Builder builder;
 
@@ -42,6 +49,13 @@ public abstract class BaseFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mBaseActivity = (BaseActivity) context;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerNetworkState();
     }
 
     protected void addFragment(@NonNull Fragment fragment, @IdRes int fragmentContainer, boolean addToBackStack) {
@@ -142,5 +156,31 @@ public abstract class BaseFragment extends Fragment {
         });
         dialog = builder.create();
         dialog.show();
+    }
+
+    private void registerNetworkState() {
+        if (mBaseActivity != null) {
+            mNetworkStateReceiver = new NetworkStateReceiver();
+            mNetworkStateReceiver.addListener(this);
+            mBaseActivity.registerReceiver(mNetworkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+        }
+    }
+
+    @Override
+    public void networkAvailable() {
+        onNetworkOn();
+    }
+
+    @Override
+    public void networkUnavailable() {
+        onNetworkOff();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mBaseActivity != null) {
+            mBaseActivity.unregisterReceiver(mNetworkStateReceiver);
+        }
     }
 }

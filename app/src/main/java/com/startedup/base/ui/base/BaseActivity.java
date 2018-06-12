@@ -3,9 +3,12 @@ package com.startedup.base.ui.base;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +24,7 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.startedup.base.R;
+import com.startedup.base.broadcast.NetworkStateReceiver;
 import com.startedup.base.utils.CommonUtil;
 import com.startedup.base.utils.DialogUtils;
 import com.startedup.base.utils.FragmentTransactionUtil;
@@ -29,15 +33,38 @@ import com.startedup.base.utils.ResourceFinder;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
 
+    private NetworkStateReceiver mNetworkStateReceiver;
 
     protected abstract void onPermissionAllGranted();
 
     protected abstract void onPermissionGranted();
 
+    protected abstract void onNetworkOn();
+
+    protected abstract void onNetworkOff();
+
     private AlertDialog.Builder builder;
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerNetworkState();
+    }
+
+    public void registerNetworkState() {
+        mNetworkStateReceiver = new NetworkStateReceiver();
+        mNetworkStateReceiver.addListener(this);
+        this.registerReceiver(mNetworkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+    }
 
     protected void addFragment(@NonNull Fragment fragment, @IdRes int fragmentContainer, boolean addToBackStack) {
         FragmentTransactionUtil.addFragment(getSupportFragmentManager(), fragment, fragmentContainer, addToBackStack);
@@ -130,4 +157,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @Override
+    public void networkAvailable() {
+        onNetworkOn();
+    }
+
+    @Override
+    public void networkUnavailable() {
+        onNetworkOff();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mNetworkStateReceiver);
+    }
 }
