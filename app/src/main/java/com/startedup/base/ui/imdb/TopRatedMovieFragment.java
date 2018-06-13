@@ -16,7 +16,6 @@ import com.startedup.base.R;
 import com.startedup.base.model.movies.TopRatedMovieResponse;
 import com.startedup.base.ui.base.BaseFragment;
 import com.startedup.base.ui.base.BaseView;
-import com.startedup.base.utils.CommonUtil;
 import com.startedup.base.utils.ResourceFinder;
 
 import java.lang.ref.WeakReference;
@@ -30,12 +29,12 @@ import timber.log.Timber;
 
 public class TopRatedMovieFragment extends BaseFragment implements BaseView {
 
+    // Views
     @BindView(R.id.rv_top_rated_movies)
     RecyclerView rvTopRatedMovies;
     Unbinder unbinder;
     @BindView(R.id.bt_load)
     Button btLoad;
-    // Views
     private View mView;
 
     private ProgressDialog progressDialog;
@@ -83,7 +82,7 @@ public class TopRatedMovieFragment extends BaseFragment implements BaseView {
 
     @Override
     public void showError(boolean isDialog, String errorMessage) {
-        CommonUtil.showToasLong(getActivity(), errorMessage);
+        showToastLong(errorMessage);
     }
 
     @Override
