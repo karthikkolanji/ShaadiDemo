@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">BaseCode</string>
-    <string name="title_activity_movie">MovieActivity</string>
+    <string name="app_name">BaseApp</string>
 
 
     <!--Error-->

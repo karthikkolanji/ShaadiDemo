@@ -13,25 +13,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.startedup.base.R;
 import com.startedup.base.broadcast.NetworkStateReceiver;
+import com.startedup.base.listener.PermissionResultListener;
 import com.startedup.base.utils.CommonUtil;
 import com.startedup.base.utils.DialogUtils;
 import com.startedup.base.utils.FragmentTransactionUtil;
+import com.startedup.base.utils.PermissionUtil;
 import com.startedup.base.utils.ResourceFinder;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class BaseActivity extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
 
@@ -75,62 +66,52 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
     }
 
     protected void requestMultiplePermission(ArrayList<String> permissionList) {
-        Dexter.withActivity(this)
-                .withPermissions(permissionList)
-                .withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        if (report.isAnyPermissionPermanentlyDenied()) {
-                            showEnablePermissionDialog();
 
-                        } else if (report.areAllPermissionsGranted()) {
-                            onPermissionAllGranted();
-                        } else {
-                            CommonUtil.showToasLong(BaseActivity.this, ResourceFinder.getString(R.string.permission_denied));
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).withErrorListener(new PermissionRequestErrorListener() {
+        PermissionUtil.requestMultiplePermission(this, permissionList, new PermissionResultListener() {
             @Override
-            public void onError(DexterError error) {
-                CommonUtil.showToasLong(BaseActivity.this, error.toString());
+            public void onAllPermissionGranted() {
+                onPermissionAllGranted();
             }
-        }).check();
+
+            @Override
+            public void onPermissionGranted() {
+                // nothing
+            }
+
+            @Override
+            public void onPermissionPermanentlyDenied() {
+                showEnablePermissionDialog();
+            }
+
+            @Override
+            public void onPermissionDenied() {
+                CommonUtil.showToasLong(BaseActivity.this, ResourceFinder.getString(R.string.permission_denied));
+            }
+        });
+
     }
 
     protected void requestSinglePermission(String permission) {
 
-        Dexter.withActivity(this)
-                .withPermission(permission)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        BaseActivity.this.onPermissionGranted();
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            showEnablePermissionDialog();
-                        } else {
-                            CommonUtil.showToasLong(BaseActivity.this, ResourceFinder.getString(R.string.permission_denied));
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).withErrorListener(new PermissionRequestErrorListener() {
+        PermissionUtil.requestSinglePermission(this, permission, new PermissionResultListener() {
             @Override
-            public void onError(DexterError error) {
-                CommonUtil.showToasLong(BaseActivity.this, error.toString());
+            public void onAllPermissionGranted() {
+                // nothing
+            }
+
+            @Override
+            public void onPermissionGranted() {
+                BaseActivity.this.onPermissionGranted();
+            }
+
+            @Override
+            public void onPermissionPermanentlyDenied() {
+                showEnablePermissionDialog();
+            }
+
+            @Override
+            public void onPermissionDenied() {
+                CommonUtil.showToasLong(BaseActivity.this, ResourceFinder.getString(R.string.permission_denied));
             }
         });
     }
