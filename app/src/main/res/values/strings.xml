@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseApp</string>
+    <string name="app_name">HiraSelect</string>
 
 
     <!--Error-->
@@ -9,7 +9,7 @@
 
     <!--Permission-->
     <string name="permission_denied">Permission denied. Aborting process</string>
-    <string name="permission_permanently_denied">Permission denied. Aborting process</string>
+    <string name="permission_permanently_denied">Permission denied. Aborting process</string>git remote
     <string name="permission_granted">Permission granted</string>
     <string name="permission_show_rationale">Show rationale</string>
     <string name="permission_needed">You need to enable the permission in app setting to use the app.</string>

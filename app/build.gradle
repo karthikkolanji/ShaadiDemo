@@ -26,16 +26,16 @@ android {
         }
     }
 
-    flavorDimensions "tier"
+    flavorDimensions "flavor"
     productFlavors {
 
         prodFlavour {
-            dimension 'tier'
-            applicationId "actual app package name"
+            dimension 'flavor'
+            applicationId "hiranandani.select"
         }
-        devFlavour {
-            dimension 'tier'
-            applicationId "com.startedup.base"
+        prodFlavour {
+            dimension 'flavor'
+            applicationId "hiranandani.select.stag"
         }
     }
     sourceSets {

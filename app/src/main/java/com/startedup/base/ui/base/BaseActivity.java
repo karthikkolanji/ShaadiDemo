@@ -85,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
 
             @Override
             public void onPermissionDenied() {
-                CommonUtil.showToasLong(BaseActivity.this, ResourceFinder.getString(R.string.permission_denied));
+                showToastLong(ResourceFinder.getString(R.string.permission_denied));
             }
         });
 
@@ -111,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
 
             @Override
             public void onPermissionDenied() {
-                CommonUtil.showToasLong(BaseActivity.this, ResourceFinder.getString(R.string.permission_denied));
+                showToastLong(ResourceFinder.getString(R.string.permission_denied));
             }
         });
     }
@@ -136,6 +136,14 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkS
         });
         dialog = builder.create();
         dialog.show();
+    }
+
+    protected void showToastShort(String toastMessage) {
+        CommonUtil.showToasLong(BaseActivity.this, toastMessage);
+    }
+
+    protected void showToastLong(String toastMessage) {
+        CommonUtil.showToasLong(BaseActivity.this, toastMessage);
     }
 
     @Override
