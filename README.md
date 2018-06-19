@@ -1,7 +1,14 @@
-# BaseCode Repo
-This repository contains basic project structure with all necessary libraries implemented and singleton class configurations like Retrofit, SharedPreeference, ResourceFinder etc readily available. We can pull this repo and start continuing with new projects
+#This contains
 
-This contains
+**NOTE**
+
+* Don't use Serializable . Use Parcelable (https://android.jlelse.eu/parcelable-vs-serializable-6a2556d51538)
+
+* Use proper nomenclature for variable and views . Eg, Recyclerview (rv_),Imageview (iv_),Progressbar(pb_)
+
+
+
+
 
 **BaseActivity**
 This handles runtime permission. All subclass Activity has to only implement onPermissionGranted() methods, rest permission denied case is handled by this base class
@@ -16,10 +23,11 @@ This interface has showLoading(),hideLoading(),showError(),hideError(),onSuccess
 This handles creation of singleton Retrofit object. Implenting class can pass ServiceInterface class to access the API call method
 
 **RetrofitCallbackWrapper**
-This handles showLoading(),hideLoading(),showError(),hideError(),onSuccess() methods globally , no need to every time implement this method while using Retrofit call.
+This handles showLoading(),hideLoading(),showError(),hideError(),onSuccess() methods globally , no need to every time implement this method while using Retrofit call. (https://medium.com/mindorks/rxjava2-and-retrofit2-error-handling-on-a-single-place-8daf720d42d6)
 
 **SharedPrefUtil**
 This handles creation of singleton SharedPreference object. Any class can access the getter() & setter() via KEY to get and set the values in SharedPrefernce file.
 
 **ResourceFinder**
 This contains methods to like getString(int resId),getColour(int resId),getDrawable(int resId),getDimension(int resId) readily available . Any class can get appropriate object by passing valid parameters without using any extra code.
+

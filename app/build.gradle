@@ -32,10 +32,14 @@ android {
         prodFlavour {
             dimension 'flavor'
             applicationId "hiranandani.select"
+            buildConfigField("String", "BASE_URL", "\"http://production.com\"")
+            resValue "string", "app_name", "AppName"
         }
-        prodFlavour {
+        stagFlavour {
             dimension 'flavor'
             applicationId "hiranandani.select.stag"
+            buildConfigField("String", "BASE_URL", "\"http://stag.com\"")
+            resValue "string", "app_name", "AppNameStag"
         }
     }
     sourceSets {
@@ -78,7 +82,6 @@ dependencies {
 
     // ButterKnife
     implementation library.butterKnife
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     annotationProcessor library.butterKnifeCompiler
 
     // Google Play Service

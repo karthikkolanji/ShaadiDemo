@@ -157,14 +157,14 @@ public abstract class BaseFragment extends Fragment implements NetworkStateRecei
 
     protected void showToastShort(String toastMessage) {
         if (mBaseActivity != null) {
-            CommonUtil.showToasLong(mBaseActivity, toastMessage);
+            mBaseActivity.showToastShort(toastMessage);
         }
 
     }
 
     protected void showToastLong(String toastMessage) {
         if (mBaseActivity != null) {
-            CommonUtil.showToasLong(mBaseActivity, toastMessage);
+            mBaseActivity.showToastLong(toastMessage);
         }
 
     }
