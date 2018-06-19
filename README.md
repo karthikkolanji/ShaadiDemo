@@ -31,3 +31,6 @@ This handles creation of singleton SharedPreference object. Any class can access
 **ResourceFinder**
 This contains methods to like getString(int resId),getColour(int resId),getDrawable(int resId),getDimension(int resId) readily available . Any class can get appropriate object by passing valid parameters without using any extra code.
 
+**Crash handled gracefully**
+https://proandroiddev.com/hide-your-crashes-gracefully-and-still-report-them-9b1c85b25875
+
