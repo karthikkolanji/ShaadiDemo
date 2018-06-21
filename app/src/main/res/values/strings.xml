@@ -2,7 +2,7 @@
 
 
     <!--Error-->
-    <string name="network_error">No network. Please try again</string>
+    <string name="network_error">No network. Please tap here to retry</string>
     <string name="timeout_error">Taking too long to load data. Please check your network</string>
     <string name="unknown_error">Something went wrong. Please try again</string>
 

@@ -10,10 +10,10 @@ public class Info{
 	private String seed;
 
 	@SerializedName("page")
-	private int page;
+	private String page;
 
 	@SerializedName("results")
-	private int results;
+	private String results;
 
 	@SerializedName("version")
 	private String version;
@@ -26,19 +26,19 @@ public class Info{
 		return seed;
 	}
 
-	public void setPage(int page){
+	public void setPage(String page){
 		this.page = page;
 	}
 
-	public int getPage(){
+	public String getPage(){
 		return page;
 	}
 
-	public void setResults(int results){
+	public void setResults(String results){
 		this.results = results;
 	}
 
-	public int getResults(){
+	public String getResults(){
 		return results;
 	}
 

@@ -1,11 +1,12 @@
 package com.startedup.base.model.shaadi;
 
+import com.startedup.base.ui.base.BaseResponse;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
 
-public class ShaadiResponse{
+public class ShaadiUserResponse extends BaseResponse {
 
 	@SerializedName("results")
 	private List<ResultsItem> results;

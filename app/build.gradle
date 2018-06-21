@@ -33,13 +33,13 @@ android {
             dimension 'flavor'
             applicationId "com.shaadi.demo"
             buildConfigField("String", "BASE_URL", "\"https://randomuser.me/\"")
-            resValue "string", "app_name", "ShaadiDemoApp"
+            resValue "string", "app_name", "ShaadiApp"
         }
         stagFlavour {
             dimension 'flavor'
             applicationId "com.shaadi.demo.stag"
             buildConfigField("String", "BASE_URL", "\"http://stag.com\"")
-            resValue "string", "app_name", "AppNameStag"
+            resValue "string", "app_name", "ShaadiAppStag"
         }
     }
     sourceSets {

@@ -5,7 +5,8 @@ public interface BaseView {
 
     void hideLoading();
 
-    void showError(boolean isDialog, String errorMessage);
+    void showNetworkError(boolean isDialog, String errorMessage);
+    void showUnknownError(boolean isDialog, String errorMessage);
 
     void hideError();
 

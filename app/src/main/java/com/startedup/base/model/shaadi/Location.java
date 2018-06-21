@@ -16,7 +16,7 @@ public class Location{
 	private Timezone timezone;
 
 	@SerializedName("postcode")
-	private int postcode;
+	private String postcode;
 
 	@SerializedName("coordinates")
 	private Coordinates coordinates;
@@ -48,11 +48,11 @@ public class Location{
 		return timezone;
 	}
 
-	public void setPostcode(int postcode){
+	public void setPostcode(String postcode){
 		this.postcode = postcode;
 	}
 
-	public int getPostcode(){
+	public String getPostcode(){
 		return postcode;
 	}
 
