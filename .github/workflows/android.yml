@@ -43,6 +43,7 @@ jobs:
      #   run: ./gradlew build
 
       - name: Build Debug APK
+        working-directory: app/build/outputs/apk/prodFlavour/debug/
         run: bash ./gradlew assembleDebug --stacktrace
 
       - name: Save generated .apk file
