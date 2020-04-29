@@ -18,8 +18,16 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
 
+      - name: Extract tag name
+        id: tag_name
+        shell:bash
+        run: echo ::set-output name=tag::${GITHUB_REF:10}
+
       - name: Echo
-        run: echo ${{ steps.branch_name.outputs.branch }}
+        run: |
+          echo ${{ steps.branch_name.outputs.branch }}
+          echo ${{ steps.tag_name.outputs.tag }}
+
 
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
