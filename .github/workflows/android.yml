@@ -46,10 +46,10 @@ jobs:
         run: bash ./gradlew assembleDebug --stacktrace
 
       - name: Save generated .apk file
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
           name: app
-          path: prodFlavourDebug.apk
+          path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
 
       - name: Create Release
         id: create_release
