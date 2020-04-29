@@ -13,14 +13,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Extract Tag Name
+        - id: tag
+            uses: actions/github-script@0.2.0
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              script: |
+                return context.payload.ref.replace(/\/refs\/tags\//, '');
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.tag_name }}
-          release_name: Release ${{ github.tag_name }}
+          tag_name: ${{steps.tag.outputs.result}}
+          release_name: Release ${{ steps.tag.outputs.result }}
           draft: false
           prerelease: false
 
