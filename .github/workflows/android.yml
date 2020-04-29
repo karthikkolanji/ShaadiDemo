@@ -45,6 +45,12 @@ jobs:
       - name: Build Debug APK
         run: ./gradlew assembleDebug
 
+      - name: Save generated .apk file
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/git_action_generated_apk.apk
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
