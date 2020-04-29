@@ -22,13 +22,6 @@ jobs:
         id: tag_name
         run: echo ::set-output name=tag::${GITHUB_REF:10}
 
-      - name: Check output
-        env:
-          RELEASE_VERSION: ${{ steps.tag_name.outputs.tag }}
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ steps.tag_name.outputs.tag }}
-
       - name: Echo
         run: |
           echo ${{ steps.branch_name.outputs.branch }}
