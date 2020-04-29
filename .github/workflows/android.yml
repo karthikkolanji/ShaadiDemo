@@ -19,11 +19,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v4
-          release_name:  Release v4
+          tag_name: ${{ github.tag }}
+          release_name: Release ${{ github.tag }}
           draft: false
           prerelease: false
-
 
       - name: Upload Release Asset
         id: upload-release-asset
