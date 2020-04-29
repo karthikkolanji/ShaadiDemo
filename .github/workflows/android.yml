@@ -24,10 +24,10 @@ jobs:
 
       - name: Check output
         env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+          RELEASE_VERSION: ${{ steps.tag_name.outputs.tag }}
         run: |
           echo $RELEASE_VERSION
-          echo ${{ steps.vars.outputs.tag }}
+          echo ${{ steps.tag_name.outputs.tag }}
 
       - name: Echo
         run: |
