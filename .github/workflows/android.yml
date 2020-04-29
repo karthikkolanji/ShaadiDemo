@@ -21,7 +21,14 @@ jobs:
       - name: Extract tag name
         id: tag_name
         shell:bash
-        run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo ::set-output name=tag::${GITHUB_REF:10}
+
+        - name: Check output
+          env:
+            RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+            run: |
+                 echo $RELEASE_VERSION
+                 echo ${{ steps.vars.outputs.tag }}
 
       - name: Echo
         run: |
