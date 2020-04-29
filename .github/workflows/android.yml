@@ -13,15 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Extract Branch Name
-        id: branch
-        uses: actions/github-script@0.2.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-                return context.payload.ref.replace(/\/refs\/heads\//, '');
+      - name: Extract branch name
+        id: branch_name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+
       - name: Echo
-        run: echo ${{ steps.tag.outputs.result }}
+        run: echo ${{ steps.branch_name.outputs.branch }}
 
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
@@ -33,8 +31,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{steps.branch.outputs.result}}
-          release_name: Release ${{ steps.branch.outputs.result }}
+          tag_name: ${{steps.branch_name.outputs.branch}}
+          release_name: Release ${{ steps.branch_name.outputs.branch }}
           draft: false
           prerelease: false
 
