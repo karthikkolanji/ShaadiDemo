@@ -14,11 +14,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Extract Tag Name
-        - id: tag
-            uses: actions/github-script@0.2.0
-            with:
-              github-token: ${{ secrets.GITHUB_TOKEN }}
-              script: |
+        id: tag
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
                 return context.payload.ref.replace(/\/refs\/tags\//, '');
 
       - name: Create Release
