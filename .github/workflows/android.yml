@@ -44,7 +44,7 @@ jobs:
 
       - name: Build Debug APK
         working-directory: app/build/outputs/apk/prodFlavour/debug/
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug
 
       - name: Save generated .apk file
         uses: actions/upload-artifact@v2
