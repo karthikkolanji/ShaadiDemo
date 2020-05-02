@@ -45,7 +45,7 @@ jobs:
       - name: Echo
         run: |
           echo ${{ steps.branch_name.outputs.branch }}
-          echo ${{ steps.changelogs.outputs.changelog }}
+          echo ${{ steps.changelogs.outputs }}
 
 
       - name: Build project # This would actually build your project, using zip for an example artifact
