@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-        run: /Users/karthikkolanji/ShaadiDemo/.github/workflows/python3 release_mail_generator.py d2ec625d58c6eb44f47b43239fd7aa523d142622  v2.21
+      - run: /Users/karthikkolanji/ShaadiDemo/.github/workflows/python3 release_mail_generator.py d2ec625d58c6eb44f47b43239fd7aa523d142622  v2.21
 
 
       - name: Echo
