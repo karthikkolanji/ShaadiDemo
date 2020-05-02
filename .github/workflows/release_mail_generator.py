@@ -92,7 +92,7 @@ class ReleaseMailGenerator:
         """
 
         github = Github(login_or_token=auth_token, per_page=self.PAGE_ITEM_COUNT)
-        repo = github.get_repo("okcredit/merchant-android")
+        repo = github.get_repo("karthikkolanji/ShaadiDemo")
         pull_requests = self.get_pull_requests(repo, milestone)
         if not pull_requests:
             print('---------------------------------------------------------------------------------------\n')
