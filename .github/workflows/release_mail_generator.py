@@ -94,6 +94,11 @@ class ReleaseMailGenerator:
         github = Github(login_or_token=auth_token, per_page=self.PAGE_ITEM_COUNT)
         repo = github.get_repo("karthikkolanji/ShaadiDemo")
         pull_requests = self.get_pull_requests(repo, milestone)
+
+        pull_request_label_map = self.get_pull_request_label_map(repo, pull_requests)
+
+
+
         changelog = self.MESSAGE.format(milestone) + self.INTERNAL_TEST_DISCLAIMER + self.TITLE_TAG_TMPL.format('Changelog')
         for label, pull_requests_list in pull_request_label_map.items():
             changelog += self.get_pull_request_details(label, pull_requests_list)
