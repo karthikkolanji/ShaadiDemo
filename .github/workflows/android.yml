@@ -22,9 +22,17 @@ jobs:
        # id: tag_name
        # run: echo ::set-output name=tag::${GITHUB_REF:10}
 
-      - name: Setup Python
-        id: setup_pyton
-        uses: ./.github/actions/setup_python
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install pipenv
+        uses: dschep/install-pipenv-action@v1
+
+      - name: Install dependencies
+        run: |
+           pipenv install --dev
 
 
       - name: Generate Change logs
