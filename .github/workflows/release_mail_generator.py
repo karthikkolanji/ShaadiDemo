@@ -94,10 +94,18 @@ class ReleaseMailGenerator:
         github = Github(login_or_token=auth_token, per_page=self.PAGE_ITEM_COUNT)
         repo = github.get_repo("karthikkolanji/ShaadiDemo")
         pull_requests = self.get_pull_requests(repo, milestone)
-
+        if not pull_requests:
+            print('---------------------------------------------------------------------------------------\n')
+            print('No pull requests found for given Milestone, Please check \n')
+            print('----------------------------------------------------------------------------------------')
+            return
         pull_request_label_map = self.get_pull_request_label_map(repo, pull_requests)
 
-
+        if not pull_request_label_map:
+            print('---------------------------------------------------------------------------------------\n')
+            print('No pull requests is merged for given Milestone, Please check \n')
+            print('----------------------------------------------------------------------------------------')
+            return
 
         changelog = self.MESSAGE.format(milestone) + self.INTERNAL_TEST_DISCLAIMER + self.TITLE_TAG_TMPL.format('Changelog')
         for label, pull_requests_list in pull_request_label_map.items():
@@ -112,4 +120,4 @@ if length < 3:
     print('This script requires two command line areguments\n1. Github access token\n2. Release milestone')
     sys.exit()
 
-print(ReleaseMailGenerator().get_changelog(sys.argv[1], sys.argv[2]))
+return ReleaseMailGenerator().get_changelog(sys.argv[1], sys.argv[2])
