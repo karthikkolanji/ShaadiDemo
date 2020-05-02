@@ -49,6 +49,8 @@ jobs:
 
       - name: Generate Change logs
         id: changelogs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/delivery/release_mail_generator.py d2ec625d58c6eb44f47b43239fd7aa523d142622  v2.21
 
 
