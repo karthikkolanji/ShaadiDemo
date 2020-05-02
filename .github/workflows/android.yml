@@ -59,6 +59,10 @@ jobs:
         with:
           tag_name: ${{steps.branch_name.outputs.branch}}
           release_name: Release ${{ steps.branch_name.outputs.branch }}
+          body: |
+            Change Logs
+            - First Change
+            - Second Change
           draft: false
           prerelease: false
 
