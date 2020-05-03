@@ -74,7 +74,7 @@ jobs:
       - name: Download generated mapping file
         uses: actions/download-artifact@v2
         with:
-          name: downloaded
+          name: uploaded
           path: app/build/outputs/apk/prodFlavour/debug/app-prodFlavour-debug.apk
 
       - name: Create Release
