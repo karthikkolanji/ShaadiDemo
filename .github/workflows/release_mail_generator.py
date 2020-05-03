@@ -120,4 +120,4 @@ if length < 3:
     print('This script requires two command line areguments\n1. Github access token\n2. Release milestone')
     sys.exit()
 
-return ReleaseMailGenerator().get_changelog(sys.argv[1], sys.argv[2])
+print(ReleaseMailGenerator().get_changelog(sys.argv[1], sys.argv[2]))
